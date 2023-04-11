@@ -22,10 +22,16 @@ model.fit(x_train, y_train)
 
 y_predict = model.predict(x_test)
 
-score = accuracy_score(y_test, y_predict)
+score = accuracy_score(y_predict, y_test)
 
-print(score)
+print(y_predict, y_test)
 
 f = open('model.pickle', 'wb')
 pickle.dump({'model': model}, f)
 f.close()
+
+model_dict = pickle.load(open('model.pickle', 'rb'))
+model = model_dict['model']
+
+print(model.predict([x_test[5]]), y_test[5])
+print(x_test[5])
